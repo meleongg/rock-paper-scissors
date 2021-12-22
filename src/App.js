@@ -312,7 +312,7 @@ const SettingsContainer = styled.div`
   align-items: center;
 
   @media (max-width: 480px) {
-    font-size: 14px;
+    font-size: 10px;
   }
 `
 
