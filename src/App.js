@@ -7,6 +7,7 @@ const AppContainer = styled.div`
   height: 100vh;
   width: 100vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #333;
@@ -28,10 +29,18 @@ const TitleContainer = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 480px) {
+    height: 125px;
+  }
 `
 
 const Title = styled.h1`
   font-size: 40px; 
+  @media (max-width: 480px) {
+    width: 100%;
+    font-size: 18px;
+  }
 `
 
 function Instructions(props) {
@@ -51,6 +60,10 @@ const InstructionsContainer = styled.div`
   width: 100%;
   font-size: 26px;
   text-align: center;
+  @media (max-width: 480px) {
+    font-size: 16px;
+    height: 24px;
+  }
 `
 const GameplayContainer = styled.div`
   height: 300px;
@@ -60,6 +73,13 @@ const GameplayContainer = styled.div`
   grid-template-columns: 2fr 1fr 2fr;
   justify-items: center;
   align-content: center;
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 150px 75px 150px;
+    height: 400px;
+    font-size: 18px;
+    row-gap: 10px;
+  }
 `
 const PlayerDisplayContainer = styled.div`
   height: 100%;
@@ -83,6 +103,12 @@ const ButtonContainer = styled.div`
   &:hover {
    cursor: pointer;
  } 
+ 
+ @media (max-width: 480px) {
+   height: 80%;
+   width: 60%;
+   font-size: 14px;
+ }
 `
 
 const ScoreContainer = styled.div`
@@ -92,6 +118,9 @@ const ScoreContainer = styled.div`
   font-size: 20px;
   font-weight: 500;
   text-align: center;
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `
 
 function Score(props) {
@@ -121,34 +150,58 @@ function ChoiceButton(props) {
 }
 
 const ChoiceContainer = styled.div`
-display: flex;
-height: 100%;
-width: 100%; 
-justify-content: center;
-align-items: center;
-grid-column: 1 / 2;
-grid-row: 2 / -1;
+  display: flex;
+  height: 100%;
+  width: 100%; 
+  justify-content: center;
+  align-items: center;
+  grid-column: 1 / 2;
+  grid-row: 2 / -1;
 `
 
 function Choice(props) {
   if (props.name === "Rock") {
-    return (
-      <ChoiceContainer>
-        <i className="fas fa-hand-rock fa-7x"></i>
-      </ChoiceContainer>
-    )
+    if (props.phone) {
+      return (
+        <ChoiceContainer>
+          <i className="fas fa-hand-rock fa-4x"></i>
+        </ChoiceContainer>
+      )
+    } else {
+      return (
+        <ChoiceContainer>
+          <i className="fas fa-hand-rock fa-7x"></i>
+        </ChoiceContainer>
+      )
+    }
   } else if (props.name === "Paper") {
-    return (
-      <ChoiceContainer>
-        <i className="fas fa-hand-paper fa-7x"></i>
-      </ChoiceContainer>
-    )
+    if (props.phone) {
+      return (
+        <ChoiceContainer>
+          <i className="fas fa-hand-paper fa-4x"></i>
+        </ChoiceContainer>
+      )
+    } else {
+      return (
+        <ChoiceContainer>
+          <i className="fas fa-hand-paper fa-7x"></i>
+        </ChoiceContainer>
+      )
+    }
   } else {
-    return (
-      <ChoiceContainer>
-        <i className="fas fa-hand-scissors fa-7x"></i>
-      </ChoiceContainer>
-    )
+    if (props.phone) {
+      return (
+        <ChoiceContainer>
+          <i className="fas fa-hand-scissors fa-4x"></i>
+        </ChoiceContainer>
+      )
+    } else {
+      return (
+        <ChoiceContainer>
+          <i className="fas fa-hand-scissors fa-7x"></i>
+        </ChoiceContainer>
+      )
+    }
   }
 }
 
@@ -164,30 +217,62 @@ const VSContainer = styled.div`
 function AiChoice(props) {
   if (props.chosen) {
     if (props.name === "ai-Rock") {
-      return (
-        <ChoiceContainer>
-          <i className="fas fa-hand-rock fa-7x"></i>
-        </ChoiceContainer>
-      )
+      if (props.phone) {
+        return (
+          <ChoiceContainer>
+            <i className="fas fa-hand-rock fa-4x"></i>
+          </ChoiceContainer>
+        )
+      } else {
+        return (
+          <ChoiceContainer>
+            <i className="fas fa-hand-rock fa-7x"></i>
+          </ChoiceContainer>
+        )
+      }
     } else if (props.name === "ai-Paper") {
+      if (props.phone) {
+        return (
+          <ChoiceContainer>
+            <i className="fas fa-hand-paper fa-4x"></i>
+          </ChoiceContainer>
+        )
+      } else {
+        return (
+          <ChoiceContainer>
+            <i className="fas fa-hand-paper fa-7x"></i>
+          </ChoiceContainer>
+        )
+      }
+    } else {
+      if (props.phone) {
+        return (
+          <ChoiceContainer>
+            <i className="fas fa-hand-scissors fa-4x"></i>
+          </ChoiceContainer>
+        )
+      } else {
+        return (
+          <ChoiceContainer>
+            <i className="fas fa-hand-scissors fa-7x"></i>
+          </ChoiceContainer>
+        )
+      }
+    }
+  } else {
+    if (props.phone) {
       return (
         <ChoiceContainer>
-          <i className="fas fa-hand-paper fa-7x"></i>
+          <i className="fas fa-question fa-4x"></i>
         </ChoiceContainer>
       )
     } else {
       return (
         <ChoiceContainer>
-          <i className="fas fa-hand-scissors fa-7x"></i>
+          <i className="fas fa-question fa-7x"></i>
         </ChoiceContainer>
       )
     }
-  } else {
-    return (
-      <ChoiceContainer>
-        <i className="fas fa-question fa-7x"></i>
-      </ChoiceContainer>
-    )
   }
 }
 
@@ -204,16 +289,20 @@ const BotDisplayContainer = styled.div`
 const SettingsContainer = styled.div`
   height: 50px;
   width: 150px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 480px) {
+    height: 25px;
+    font-size: 14px;
+  }
 `
 
 const PlayAgainButtonContainer = styled.div`
   display: flex;
   background-color: #C4C4C4;
-  font-size: 20px;
   height: 100%;
   width: 100%;
   text-align: center;
@@ -238,10 +327,19 @@ function App() {
   const [chosen, setChosen] = useState(false)
   const [addedScore, setAddedScore] = useState(false)
   const [score, setScore] = useState([0, 0])
+  const [isPhone, setIsPhone] = useState(false)
 
   const chooseAiOption = () => {
     return aiChoices[Math.floor(Math.random() * aiChoices.length)]
   }
+
+  useEffect(() => {
+    if (window.matchMedia('(max-width: 480px)')) {
+      setIsPhone(true);
+    } else {
+      setIsPhone(false);
+    }
+  }, [isPhone])
 
   useEffect(() => {
     if (chosen && !addedScore) {
@@ -320,7 +418,7 @@ function App() {
             <Score name='player' score={score[0]} />
             {choices.map((item, i) => {
               if (choices.length === 1) {
-                return <Choice key={i} name={item} chosen={false} />
+                return <Choice key={i} name={item} chosen={false} phone={isPhone} />
               } else {
                 return <ChoiceButton key={i} name={item} choiceCallback={() => chooseOption(i)} />
               }
@@ -331,7 +429,7 @@ function App() {
           </VSContainer>
           <BotDisplayContainer>
             <Score name='ai' score={score[1]} />
-            <AiChoice key={"ai-choice"} name={`ai-${aiChoices[0]}`} chosen={chosen} />
+            <AiChoice key={"ai-choice"} name={`ai-${aiChoices[0]}`} chosen={chosen} phone={isPhone} />
           </BotDisplayContainer>
         </GameplayContainer>
         <SettingsContainer>

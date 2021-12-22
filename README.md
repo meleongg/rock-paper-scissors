@@ -8,3 +8,4 @@ This is my very first project working the React.js JavaScript framework! I decid
 - Everytime I call the SetState Hook, it rerenders the entire App, which may cause infinite loops 😅
   - useEffect was a good way to counter this
 - Function Components can return false if I don't want to return HTML
+- How to deploy Github Pages from the terminal using the gh-pages package
