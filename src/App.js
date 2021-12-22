@@ -16,13 +16,16 @@ const GameContainer = styled.div`
   height: 80%;
   width: 80%;
   background-color: #FFF;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr 1fr;
   align-items: center;
-  flex-direction: column;
+  justify-items: center;
+  row-gap: 10px;
 `
 
 const TitleContainer = styled.div`
-  height: 225px;
+  height: 80%;
   width: 80%;
   font-weight: 800;
   text-align: center;
@@ -31,7 +34,7 @@ const TitleContainer = styled.div`
   align-items: center;
 
   @media (max-width: 480px) {
-    height: 125px;
+    height: 80%;
   }
 `
 
@@ -66,19 +69,20 @@ const InstructionsContainer = styled.div`
   }
 `
 const GameplayContainer = styled.div`
-  height: 300px;
+  height: 100%;
   width: 80%;
   font-size: 24px;
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   justify-items: center;
   align-content: center;
+  
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
-    grid-template-rows: 150px 75px 150px;
-    height: 400px;
+    grid-template-rows: 2fr 1fr 2fr;
     font-size: 18px;
-    row-gap: 10px;
+    row-gap: 20px;
+    grid-row: 2 / 3;
   }
 `
 const PlayerDisplayContainer = styled.div`
@@ -90,6 +94,11 @@ const PlayerDisplayContainer = styled.div`
   row-gap: 20px;
   justify-items: center; 
   align-items: center;
+
+  @media (max-width: 480px) {
+    row-gap: 10px;
+    grid-template-rows: 1fr;
+  }
 `
 
 const ButtonContainer = styled.div`
@@ -105,9 +114,11 @@ const ButtonContainer = styled.div`
  } 
  
  @media (max-width: 480px) {
-   height: 80%;
-   width: 60%;
+   height: 100%;
+   width: 80%;
    font-size: 14px;
+   padding-top: 4px;
+   padding-bottom: 4px;
  }
 `
 
@@ -284,18 +295,23 @@ const BotDisplayContainer = styled.div`
   grid-template-rows: 1fr repeat(3, 2fr);
   row-gap: 20px;
   justify-items: center; 
+
+  @media (max-width: 480px) {
+    grid-template-rows: 1fr 3fr;
+    row-gap: 10px;
+  }
 `
 
 const SettingsContainer = styled.div`
-  height: 50px;
-  width: 150px;
+  height: 100%;
+  width: 100%;
   font-size: 20px;
   font-weight: 500;
+  display: flex;
   justify-content: center;
   align-items: center;
 
   @media (max-width: 480px) {
-    height: 25px;
     font-size: 14px;
   }
 `
@@ -303,12 +319,16 @@ const SettingsContainer = styled.div`
 const PlayAgainButtonContainer = styled.div`
   display: flex;
   background-color: #C4C4C4;
-  height: 100%;
-  width: 100%;
+  height: 30%;
+  width: 30%;
   text-align: center;
 
   &:hover {
   cursor: pointer;
+
+  @media (max-width: 480px) {
+    height: 20%;
+  }
 `
 
 function PlayAgainButton(props) {
@@ -334,7 +354,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (window.matchMedia('(max-width: 480px)')) {
+    if (window.matchMedia('(max-width: 480px)').matches) {
       setIsPhone(true);
     } else {
       setIsPhone(false);
@@ -366,7 +386,7 @@ function App() {
     } else {
       return score
     }
-  })
+  }, [chosen, addedScore, score, choices, aiChoices])
 
   const compareChoices = (c1, c2) => {
     if ((c1 === "Rock") && (c2 === "Paper")) {
